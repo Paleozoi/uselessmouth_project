@@ -1,4 +1,5 @@
 This is a fork of Source SDK 2013 by UselessMouth: https://twitter.com/UselessMouth
+Valve's Source SDK link: https://github.com/ValveSoftware/source-sdk-2013
 
                SOURCE 1 SDK LICENSE
 
@@ -8,7 +9,7 @@ THIS DOCUMENT DESCRIBES A CONTRACT BETWEEN YOU AND VALVE
 CORPORATION ("Valve").  PLEASE READ IT BEFORE DOWNLOADING OR USING 
 THE SOURCE ENGINE SDK ("SDK"). BY DOWNLOADING AND/OR USING THE 
 SOURCE ENGINE SDK YOU ACCEPT THIS LICENSE. IF YOU DO NOT AGREE TO 
-THE TERMS OF THIS LICENSE PLEASE DON�T DOWNLOAD OR USE THE SDK.  
+THE TERMS OF THIS LICENSE PLEASE DON'T DOWNLOAD OR USE THE SDK.  
 
   You may, free of charge, download and use the SDK to develop a modified Valve game 
 running on the Source engine.  You may distribute your modified Valve game in source and 
