@@ -54,3 +54,6 @@ config.cfg
 # shader files
 *.tmp
 
+# Game files
+/mp/game/
+/mp/game/bin/
