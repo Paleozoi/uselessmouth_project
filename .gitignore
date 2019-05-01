@@ -57,3 +57,7 @@ config.cfg
 # Game files
 /mp/game/
 /mp/game/bin/
+
+# Misc files for dev
+/dev_misc
+/.vscode
