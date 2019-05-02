@@ -68,6 +68,8 @@ END_PREDICTION_DATA()
 
 static ConVar cl_playermodel( "cl_playermodel", "none", FCVAR_USERINFO | FCVAR_ARCHIVE | FCVAR_SERVER_CAN_EXECUTE, "Default Player Model");
 static ConVar cl_defaultweapon( "cl_defaultweapon", "weapon_physcannon", FCVAR_USERINFO | FCVAR_ARCHIVE, "Default Spawn Weapon");
+static ConVar cl_fp_ragdoll ( "cl_fp_ragdoll", "1", FCVAR_CHEAT, "Allow first person ragdolls" );
+static ConVar cl_fp_ragdoll_auto ( "cl_fp_ragdoll_auto", "0", FCVAR_CHEAT, "Autoswitch to ragdoll thirdperson-view when necessary" );
 
 void SpawnBlood (Vector vecSpot, const Vector &vecDir, int bloodColor, float flDamage);
 
@@ -712,8 +714,33 @@ C_BaseAnimating *C_HL2MP_Player::BecomeRagdollOnClient()
 
 void C_HL2MP_Player::CalcView( Vector &eyeOrigin, QAngle &eyeAngles, float &zNear, float &zFar, float &fov )
 {
+	// if we're dead, we want to deal with first or third person ragdolls.
 	if ( m_lifeState != LIFE_ALIVE && !IsObserver() )
 	{
+		// First person ragdolls
+		if ( cl_fp_ragdoll.GetBool() && m_hRagdoll.Get() )
+		{
+			// pointer to the ragdoll
+			C_HL2MPRagdoll *pRagdoll = (C_HL2MPRagdoll*)m_hRagdoll.Get();
+
+			// gets its origin and angles
+			pRagdoll->GetAttachment( pRagdoll->LookupAttachment( "eyes" ), eyeOrigin, eyeAngles );
+			Vector vForward; 
+			AngleVectors( eyeAngles, &vForward );
+
+			if ( cl_fp_ragdoll_auto.GetBool() )
+			{
+				// DM: Don't use first person view when we are very close to something
+				trace_t tr;
+				UTIL_TraceLine( eyeOrigin, eyeOrigin + ( vForward * 10000 ), MASK_ALL, pRagdoll, COLLISION_GROUP_NONE, &tr );
+
+				if ( (!(tr.fraction < 1) || (tr.endpos.DistTo(eyeOrigin) > 25)) )
+					return;
+			}
+			else
+				return;
+		}
+
 		Vector origin = EyePosition();			
 
 		IRagdoll *pRagdoll = GetRepresentativeRagdoll();
