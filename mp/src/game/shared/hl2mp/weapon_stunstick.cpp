@@ -150,6 +150,7 @@ PRECACHE_WEAPON_REGISTER( weapon_stunstick );
 
 
 acttable_t	CWeaponStunStick::m_acttable[] = 
+{
 	{ ACT_MP_STAND_IDLE,				ACT_HL2MP_IDLE_MELEE,					false },
 	{ ACT_MP_CROUCH_IDLE,				ACT_HL2MP_IDLE_CROUCH_MELEE,			false },
 
