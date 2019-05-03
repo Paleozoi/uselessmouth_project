@@ -87,7 +87,7 @@ static HL2MPViewVectors g_HL2MPViewVectors(
 	Vector( 0, 0, 14 ),		  //VEC_DEAD_VIEWHEIGHT (m_vDeadViewHeight)
 
 	Vector(-16, -16, 0 ),	  //VEC_CROUCH_TRACE_MIN (m_vCrouchTraceMin)
-	Vector( 16,  16,  36 )	  //VEC_CROUCH_TRACE_MAX (m_vCrouchTraceMax)
+	Vector( 16,  16,  60 )	  //VEC_CROUCH_TRACE_MAX (m_vCrouchTraceMax)
 );
 
 static const char *s_PreserveEnts[] =

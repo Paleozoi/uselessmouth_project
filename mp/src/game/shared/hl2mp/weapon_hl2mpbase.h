@@ -38,12 +38,14 @@ public:
 
 	CWeaponHL2MPBase();
 
-    #ifdef GAME_DLL
-        DECLARE_DATADESC();
-        void Materialize( void );
-        virtual	int	ObjectCaps( void );
-        virtual void	FallThink( void );						// make the weapon fall to the ground after spawning
-    #endif
+	#ifdef GAME_DLL
+		DECLARE_DATADESC();
+	
+		void SendReloadSoundEvent( void );
+
+		void Materialize( void );
+		virtual	int	ObjectCaps( void );
+	#endif
 
 	// All predicted weapons need to implement and return true
 	virtual bool	IsPredicted() const;
@@ -58,8 +60,7 @@ public:
 
 	virtual void FireBullets( const FireBulletsInfo_t &info );
 	virtual void FallInit( void );
-	virtual bool Reload();
-
+	
 public:
 	#if defined( CLIENT_DLL )
 		

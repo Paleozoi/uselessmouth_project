@@ -314,7 +314,7 @@ static void RagdollCreateObjects( IPhysicsEnvironment *pPhysEnv, ragdoll_t &ragd
 
 void RagdollSetupCollisions( ragdoll_t &ragdoll, vcollide_t *pCollide, int modelIndex )
 {
-	// Assert(pCollide); // NOTE(richard): Fix assert failure when dying by crashing a vehicle #277
+	Assert(pCollide);
 	if (!pCollide)
 		return;
 

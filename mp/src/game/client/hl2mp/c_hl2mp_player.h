@@ -9,7 +9,7 @@
 #define HL2MP_PLAYER_H
 #pragma once
 
-#include "hl2mp_playeranimstate.h"
+class C_HL2MP_Player;
 #include "c_basehlplayer.h"
 #include "hl2mp_player_shared.h"
 #include "beamdraw.h"
@@ -37,6 +37,7 @@ public:
 	virtual int DrawModel( int flags );
 	virtual void AddEntity( void );
 
+	QAngle GetAnimEyeAngles( void ) { return m_angEyeAngles; }
 	Vector GetAttackSpread( CBaseCombatWeapon *pWeapon, CBaseEntity *pTarget = NULL );
 
 
@@ -83,20 +84,13 @@ public:
 	void StopWalking( void );
 	bool IsWalking( void ) { return m_fIsWalking; }
 
-	virtual void					UpdateClientSideAnimation();
-	void DoAnimationEvent( PlayerAnimEvent_t event, int nData = 0 );
-	virtual void CalculateIKLocks( float currentTime );
-
-
-	static void RecvProxy_CycleLatch( const CRecvProxyData *pData, void *pStruct, void *pOut );
-
-	virtual float GetServerIntendedCycle() { return m_flServerCycle; }
-	virtual void SetServerIntendedCycle( float cycle ) { m_flServerCycle = cycle; }
+	virtual void PostThink( void );
 
 private:
 	
 	C_HL2MP_Player( const C_HL2MP_Player & );
-	CHL2MPPlayerAnimState *m_PlayerAnimState;
+
+	CPlayerAnimState m_PlayerAnimState;
 
 	QAngle	m_angEyeAngles;
 
@@ -133,9 +127,6 @@ private:
 	CNetworkVar( HL2MPPlayerState, m_iPlayerState );	
 
 	bool m_fIsWalking;
-
-	int m_cycleLatch; // The animation cycle goes out of sync very easily. Mostly from the player entering/exiting PVS. Server will frequently update us with a new one.
-	float m_flServerCycle;
 };
 
 inline C_HL2MP_Player *ToHL2MPPlayer( CBaseEntity *pEntity )

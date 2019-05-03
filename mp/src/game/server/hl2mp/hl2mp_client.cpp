@@ -63,30 +63,22 @@ void FinishClientPutInServer( CHL2MP_Player *pPlayer )
 		ClientPrint( pPlayer, HUD_PRINTTALK, "You are on team %s1\n", pPlayer->GetTeam()->GetName() );
 	}
 
-/* 	
-============
-MOTD (Message Of The Day)
+	const ConVar *hostname = cvar->FindVar( "hostname" );
+	const char *title = (hostname) ? hostname->GetString() : "MESSAGE OF THE DAY";
 
-Panel showing every time you load a map.
-NOTE(richard): I changed this.
-============
-*/
-    // const ConVar *hostname = cvar->FindVar( "hostname" );
-	// const char *title = (hostname) ? hostname->GetString() : "MESSAGE OF THE DAY";
+	KeyValues *data = new KeyValues("data");
+	data->SetString( "title", title );		// info panel title
+	data->SetString( "type", "1" );			// show userdata from stringtable entry
+	data->SetString( "msg",	"motd" );		// use this stringtable entry
+	data->SetBool( "unload", sv_motd_unload_on_dismissal.GetBool() );
 
-	// KeyValues *data = new KeyValues("data");
-	// data->SetString( "title", title );		// info panel title
-	// data->SetString( "type", "1" );			// show userdata from stringtable entry
-	// data->SetString( "msg",	"motd" );		// use this stringtable entry
-	// data->SetBool( "unload", sv_motd_unload_on_dismissal.GetBool() );
+	pPlayer->ShowViewPortPanel( PANEL_INFO, true, data );
 
-	// pPlayer->ShowViewPortPanel( PANEL_INFO, true, data );
-
-	// data->deleteThis();
+	data->deleteThis();
 }
 
 /*
-============
+===========
 ClientPutInServer
 
 called each time a player is spawned into the game
@@ -147,9 +139,6 @@ CBaseEntity* FindEntity( edict_t *pEdict, char *classname)
 //-----------------------------------------------------------------------------
 void ClientGamePrecache( void )
 {
-    // TODO(richard): there seems to be a problem with changing player models,
-    // look into this in the future:
-    // https://github.com/ValveSoftware/Source-1-Games/issues/263
 	CBaseEntity::PrecacheModel("models/player.mdl");
 	CBaseEntity::PrecacheModel( "models/gibs/agibs.mdl" );
 	CBaseEntity::PrecacheModel ("models/weapons/v_hands.mdl");

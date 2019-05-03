@@ -203,10 +203,6 @@ protected:
 
 	virtual void	CheckFalling( void );
 
-    // NOTE(richard): Duck Jump Fix, but bunnyhoping will not work with this code.
-    virtual void	DoDuckJump( float flFraction );
-    virtual void	DoUnDuckJump( float flFraction );
-
 	virtual void	PlayerRoughLandingEffects( float fvol );
 
 	void			PlayerWaterSounds( void );

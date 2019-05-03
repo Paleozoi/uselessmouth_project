@@ -3082,8 +3082,10 @@ void CTriggerCamera::Enable( void )
 		}
 	}
 
+
 	m_nPlayerButtons = pPlayer->m_nButtons;
 
+	
 	// Make the player invulnerable while under control of the camera.  This will prevent situations where the player dies while under camera control but cannot restart their game due to disabled player inputs.
 	m_nOldTakeDamage = m_hPlayer->m_takedamage;
 	m_hPlayer->m_takedamage = DAMAGE_NO;
@@ -3153,13 +3155,9 @@ void CTriggerCamera::Enable( void )
 		if ( m_pPath->m_flSpeed != 0 )
 			m_targetSpeed = m_pPath->m_flSpeed;
 		
-		// Compute the distance to the next path already:
-		m_vecMoveDir = m_pPath->GetLocalOrigin() - GetLocalOrigin();
-		m_moveDistance = VectorNormalize( m_vecMoveDir );
-		m_flStopTime = gpGlobals->curtime + m_pPath->GetDelay();
+		m_flStopTime += m_pPath->GetDelay();
 	}
-	else
-		m_moveDistance = 0.0f;
+
 
 	// copy over player information. If we're interpolating from
 	// the player position, do something more elaborate.
@@ -3198,12 +3196,15 @@ void CTriggerCamera::Enable( void )
 	}
 
 	// Only track if we have a target
-	if ( m_hTarget || (m_moveDistance > 0 && m_pPath) || HasSpawnFlags( SF_CAMERA_PLAYER_INTERRUPT ) )
+	if ( m_hTarget )
 	{
 		// follow the player down
 		SetThink( &CTriggerCamera::FollowTarget );
 		SetNextThink( gpGlobals->curtime );
 	}
+
+	m_moveDistance = 0;
+	Move();
 
 	DispatchUpdateTransmitState();
 }
@@ -3270,7 +3271,13 @@ void CTriggerCamera::FollowTarget( )
 	if (m_hPlayer == NULL)
 		return;
 
-	if ((!HasSpawnFlags(SF_CAMERA_PLAYER_INFINITE_WAIT) && (m_flReturnTime < gpGlobals->curtime)) || (!m_hTarget && !m_pPath))
+	if ( m_hTarget == NULL )
+	{
+		Disable();
+		return;
+	}
+
+	if ( !HasSpawnFlags(SF_CAMERA_PLAYER_INFINITE_WAIT) && (!m_hTarget || m_flReturnTime < gpGlobals->curtime) )
 	{
 		Disable();
 		return;
@@ -3342,9 +3349,9 @@ void CTriggerCamera::FollowTarget( )
 		}
 	}
 
-	Move();
-    
 	SetNextThink( gpGlobals->curtime );
+
+	Move();
 }
 
 void CTriggerCamera::Move()

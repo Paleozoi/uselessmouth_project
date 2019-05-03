@@ -42,8 +42,8 @@ void ThirdPersonChange( IConVar *pConVar, const char *pOldValue, float flOldValu
 
 	ToggleThirdPerson( var.GetBool() );
 }
-// NOTE(richard): I deleted FCVAR_DEVELOPMENTONLY to get rid of annoying console warning.
-ConVar cl_thirdperson( "cl_thirdperson", "0", FCVAR_NOT_CONNECTED | FCVAR_USERINFO | FCVAR_ARCHIVE, "Enables/Disables third person", ThirdPersonChange  );
+
+ConVar cl_thirdperson( "cl_thirdperson", "0", FCVAR_NOT_CONNECTED | FCVAR_USERINFO | FCVAR_ARCHIVE | FCVAR_DEVELOPMENTONLY, "Enables/Disables third person", ThirdPersonChange  );
 
 #endif
 

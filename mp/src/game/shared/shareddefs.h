@@ -100,8 +100,7 @@ public:
 
 #define WATERJUMP_HEIGHT			8
 
-// NOTE(richard): I changed this, was 200.
-#define MAX_CLIMB_SPEED		130
+#define MAX_CLIMB_SPEED		200
 
 #if defined(TF_DLL) || defined(TF_CLIENT_DLL)
 	#define TIME_TO_DUCK		0.2
@@ -235,8 +234,7 @@ enum CastVote
 
 #define MAX_PLACE_NAME_LENGTH		18
 
-// NOTE(richard): I changed this.
-#define MAX_FOV						130
+#define MAX_FOV						90
 
 //===================================================================================================================
 // Team Defines

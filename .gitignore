@@ -29,8 +29,6 @@ obj*/
 !utils/smdlexp/smdlexp.mak
 
 # Specific Source build products
-*.pdb
-*.lib
 client.pdb
 client.dll
 client.lib

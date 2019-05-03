@@ -1248,7 +1248,7 @@ void CAPCMissile::ComputeActualDotPosition( CLaserDot *pLaserDot, Vector *pActua
 
 #define	RPG_BEAM_SPRITE		"effects/laser1.vmt"
 #define	RPG_BEAM_SPRITE_NOZ	"effects/laser1_noz.vmt"
-#define	RPG_LASER_SPRITE	"sprites/redglow1.vmt"
+#define	RPG_LASER_SPRITE	"sprites/redglow1"
 
 //=============================================================================
 // RPG
@@ -1305,24 +1305,22 @@ END_PREDICTION_DATA()
 
 #endif
 
+#ifndef CLIENT_DLL
 acttable_t	CWeaponRPG::m_acttable[] = 
 {
-	{ ACT_MP_STAND_IDLE,				ACT_HL2MP_IDLE_RPG,					false },
-	{ ACT_MP_CROUCH_IDLE,				ACT_HL2MP_IDLE_CROUCH_RPG,			false },
-
-	{ ACT_MP_RUN,						ACT_HL2MP_RUN_RPG,					false },
-	{ ACT_MP_CROUCHWALK,				ACT_HL2MP_WALK_CROUCH_RPG,			false },
-
-	{ ACT_MP_ATTACK_STAND_PRIMARYFIRE,	ACT_HL2MP_GESTURE_RANGE_ATTACK_RPG,	false },
-	{ ACT_MP_ATTACK_CROUCH_PRIMARYFIRE,	ACT_HL2MP_GESTURE_RANGE_ATTACK_RPG,	false },
-
-	{ ACT_MP_RELOAD_STAND,				ACT_HL2MP_GESTURE_RELOAD_RPG,		false },
-	{ ACT_MP_RELOAD_CROUCH,				ACT_HL2MP_GESTURE_RELOAD_RPG,		false },
-
-	{ ACT_MP_JUMP,						ACT_HL2MP_JUMP_RPG,					false },
+	{ ACT_HL2MP_IDLE,					ACT_HL2MP_IDLE_RPG,					false },
+	{ ACT_HL2MP_RUN,					ACT_HL2MP_RUN_RPG,					false },
+	{ ACT_HL2MP_IDLE_CROUCH,			ACT_HL2MP_IDLE_CROUCH_RPG,			false },
+	{ ACT_HL2MP_WALK_CROUCH,			ACT_HL2MP_WALK_CROUCH_RPG,			false },
+	{ ACT_HL2MP_GESTURE_RANGE_ATTACK,	ACT_HL2MP_GESTURE_RANGE_ATTACK_RPG,	false },
+	{ ACT_HL2MP_GESTURE_RELOAD,			ACT_HL2MP_GESTURE_RELOAD_RPG,		false },
+	{ ACT_HL2MP_JUMP,					ACT_HL2MP_JUMP_RPG,					false },
+	{ ACT_RANGE_ATTACK1,				ACT_RANGE_ATTACK_RPG,				false },
 };
 
 IMPLEMENT_ACTTABLE(CWeaponRPG);
+
+#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: 
@@ -1363,6 +1361,7 @@ void CWeaponRPG::Precache( void )
 	PrecacheScriptSound( "Missile.Accelerate" );
 
 	// Laser dot...
+	PrecacheModel( "sprites/redglow1.vmt" );
 	PrecacheModel( RPG_LASER_SPRITE );
 	PrecacheModel( RPG_BEAM_SPRITE );
 	PrecacheModel( RPG_BEAM_SPRITE_NOZ );
@@ -1426,7 +1425,7 @@ bool CWeaponRPG::WeaponShouldBeLowered( void )
 void CWeaponRPG::PrimaryAttack( void )
 {
 	// Only the player fires this way so we can cast
-	CHL2MP_Player *pPlayer = ToHL2MPPlayer( GetOwner() );
+	CBasePlayer *pPlayer = ToBasePlayer( GetOwner() );
 
 	if (!pPlayer)
 		return;
@@ -1481,8 +1480,7 @@ void CWeaponRPG::PrimaryAttack( void )
 	WeaponSound( SINGLE );
 
 	// player "shoot" animation
-	pPlayer->DoAnimationEvent( PLAYERANIMEVENT_ATTACK_PRIMARY );
-
+	pPlayer->SetAnimation( PLAYER_ATTACK1 );
 }
 
 //-----------------------------------------------------------------------------
@@ -1885,19 +1883,6 @@ void CWeaponRPG::GetWeaponAttachment( int attachmentId, Vector &outVector, Vecto
 	}
 }
 
-//Tony; added so when the rpg switches to third person, the beam etc is re-created.
-void CWeaponRPG::ThirdPersonSwitch( bool bThirdPerson )
-{
-	if ( m_pBeam != NULL )
-	{
-		//Tell it to die right away and let the beam code free it.
-		m_pBeam->brightness = 0.0f;
-		m_pBeam->flags &= ~FBEAM_FOREVER;
-		m_pBeam->die = gpGlobals->curtime - 0.1;
-		m_pBeam = NULL;
-	}
-}
-
 //-----------------------------------------------------------------------------
 // Purpose: Setup our laser beam
 //-----------------------------------------------------------------------------
@@ -2246,7 +2231,7 @@ int CLaserDot::DrawModel( int flags )
 	if ( pOwner != NULL && pOwner->IsDormant() == false )
 	{
 		// Always draw the dot in front of our faces when in first-person
-		if ( pOwner->IsLocalPlayer() && C_BasePlayer::LocalPlayerInFirstPersonView() )	//Tony; !!!
+		if ( pOwner->IsLocalPlayer() )
 		{
 			// Take our view position and orientation
 			vecAttachment = CurrentViewOrigin();
@@ -2256,7 +2241,8 @@ int CLaserDot::DrawModel( int flags )
 		{
 			// Take the eye position and direction
 			vecAttachment = pOwner->EyePosition();
-			QAngle angles = pOwner->EyeAngles();
+			
+			QAngle angles = pOwner->GetAnimEyeAngles();
 			AngleVectors( angles, &vecDir );
 		}
 		

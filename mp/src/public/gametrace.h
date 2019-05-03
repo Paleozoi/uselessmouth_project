@@ -92,7 +92,7 @@ inline bool CGameTrace::DidHit() const
 typedef CGameTrace trace_t;
 
 //=============================================================================
-// NOTE(richard): If I'll change this, should I increase heapsize? Probably yes.
+
 #define TLD_DEF_LEAF_MAX	256
 #define TLD_DEF_ENTITY_MAX	1024
 

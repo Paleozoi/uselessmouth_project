@@ -179,12 +179,6 @@ void DispatchEffect( const char *pName, const CEffectData &data )
 	te->DispatchEffect( filter, 0.0, data.m_vOrigin, pName, data );
 }
 
-// NOTE(tony): Client-side version of dispatcheffect with filters,
-// for shared weapon code to avoid #ifdef hell, 06.12.2013
-void DispatchEffect( const char *pName, const CEffectData &data, IRecipientFilter &filter )
-{
-	te->DispatchEffect( filter, 0.0, data.m_vOrigin, pName, data );
-}
 
 //-----------------------------------------------------------------------------
 // Playback

@@ -60,7 +60,6 @@ ConVar hl2_episodic( "hl2_episodic", "0", FCVAR_REPLICATED );
 
 #ifdef GAME_DLL
 	ConVar ent_debugkeys( "ent_debugkeys", "" );
-    static ConVar sv_removeunreasonablevphysics( "sv_removeunreasonablevphysics", "1", FCVAR_CHEAT );
 	extern bool ParseKeyvalue( void *pObject, typedescription_t *pFields, int iNumFields, const char *szKeyName, const char *szValue );
 	extern bool ExtractKeyvalue( void *pObject, typedescription_t *pFields, int iNumFields, const char *szKeyName, char *szValue, int iMaxLen );
 #endif
@@ -1171,16 +1170,6 @@ void CBaseEntity::VPhysicsUpdate( IPhysicsObject *pPhysics )
 			{
 				if ( CheckEmitReasonablePhysicsSpew() )
 				{
-#if defined( GAME_DLL ) && !defined( CLIENT_DLL )
-                    // NOTE(richard): Without entity remove the "Ignore warning" gets spammed in the console,
-                    // causing everything to crash. 
-                    if ( sv_removeunreasonablevphysics.GetBool() )
-                    {
-                        Warning( "Removing vphysics entity with unreasonable position (%f,%f,%f) (entity %s)\n", origin.x, origin.y, origin.z, GetDebugName() );
-                        UTIL_Remove( this );
-                        return;
-                    }
-#endif
 					Warning( "Ignoring unreasonable position (%f,%f,%f) from vphysics! (entity %s)\n", origin.x, origin.y, origin.z, GetDebugName() );
 				}
 			}

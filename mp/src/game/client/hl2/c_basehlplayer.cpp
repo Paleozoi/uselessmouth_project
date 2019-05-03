@@ -53,12 +53,6 @@ void CC_DropPrimary( void )
 
 static ConCommand dropprimary("dropprimary", CC_DropPrimary, "dropprimary: Drops the primary weapon of the player.");
 
-// NOTE(tony): Fix client-side linkage of player class in mp, 06.12.2013
-// link to the correct class.
-#if !defined ( HL2MP )
-LINK_ENTITY_TO_CLASS( player, C_BaseHLPlayer );
-#endif
-
 //-----------------------------------------------------------------------------
 // Constructor
 //-----------------------------------------------------------------------------

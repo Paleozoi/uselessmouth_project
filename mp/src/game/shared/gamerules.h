@@ -144,8 +144,7 @@ public:
 	virtual CBaseCombatWeapon *GetNextBestWeapon( CBaseCombatCharacter *pPlayer, CBaseCombatWeapon *pCurrentWeapon ); // I can't use this weapon anymore, get me the next best one.
 	virtual bool ShouldCollide( int collisionGroup0, int collisionGroup1 );
 
-    // NOTE(richard): I changed this. This is server default FOV for everyone. MAX_FOV is set in shareddefs.h
-	virtual int DefaultFOV( void ) { return 130; }
+	virtual int DefaultFOV( void ) { return 90; }
 
 	// This function is here for our CNetworkVars.
 	inline void NetworkStateChanged()
