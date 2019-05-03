@@ -101,7 +101,7 @@ public:
 #define WATERJUMP_HEIGHT			8
 
 // NOTE(richard): I changed this, was 200.
-#define MAX_CLIMB_SPEED		200
+#define MAX_CLIMB_SPEED		130
 
 #if defined(TF_DLL) || defined(TF_CLIENT_DLL)
 	#define TIME_TO_DUCK		0.2

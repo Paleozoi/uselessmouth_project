@@ -30,6 +30,7 @@ obj*/
 
 # Specific Source build products
 *.pdb
+*.lib
 client.pdb
 client.dll
 client.lib

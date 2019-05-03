@@ -15,7 +15,7 @@
 #include "coordsize.h"
 #include "rumble_shared.h"
 
-#define DUCKJUMP_SCALING  0.1f
+#define DUCKJUMP_SCALING  0.2f
 
 #if defined(HL2_DLL) || defined(HL2_CLIENT_DLL)
 	#include "hl_movedata.h"

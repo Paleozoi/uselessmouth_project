@@ -539,8 +539,7 @@ void CHL2MPPlayerAnimState::ComputePoseParam_MoveYaw( CStudioHdr *pStudioHdr )
 	// view direction relative to movement
 	float flYaw;	 
 
-	QAngle	angles = GetBasePlayer()->GetLocalAngles();
-	float ang = angles[ YAW ];
+    float ang = m_flEyeYaw;
 	if ( ang > 180.0f )
 	{
 		ang -= 360.0f;
