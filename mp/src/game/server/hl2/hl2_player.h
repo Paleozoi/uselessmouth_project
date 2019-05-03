@@ -15,6 +15,14 @@
 #include "simtimer.h"
 #include "soundenvelope.h"
 
+// In HL2MP we need to inherit from  BaseMultiplayerPlayer!
+#if defined ( HL2MP )
+#include "basemultiplayerplayer.h"
+#define BASEPLAYERCLASS CBaseMultiplayerPlayer
+#else
+#define BASEPLAYERCLASS CBasePlayer
+#endif
+
 class CAI_Squad;
 class CPropCombineBall;
 
@@ -27,7 +35,7 @@ enum HL2PlayerPhysFlag_e
 {
 	// 1 -- 5 are used by enum PlayerPhysFlag_e in player.h
 
-	PFLAG_ONBARNACLE	= ( 1<<6 )		// player is hangning from the barnalce
+	PFLAG_ONBARNACLE	= ( 1<<6 )		// player is hangning from the barnacle
 };
 
 class IPhysicsPlayerController;
@@ -75,10 +83,10 @@ public:
 //=============================================================================
 // >> HL2_PLAYER
 //=============================================================================
-class CHL2_Player : public CBasePlayer
+class CHL2_Player : public BASEPLAYERCLASS
 {
 public:
-	DECLARE_CLASS( CHL2_Player, CBasePlayer );
+	DECLARE_CLASS( CHL2_Player, BASEPLAYERCLASS );
 
 	CHL2_Player();
 	~CHL2_Player( void );
@@ -241,6 +249,7 @@ public:
 	virtual	bool		IsHoldingEntity( CBaseEntity *pEnt );
 	virtual void		ForceDropOfCarriedPhysObjects( CBaseEntity *pOnlyIfHoldindThis );
 	virtual float		GetHeldObjectMass( IPhysicsObject *pHeldObject );
+    virtual CBaseEntity	*GetHeldObject( void );
 
 	virtual bool		IsFollowingPhysics( void ) { return (m_afPhysicsFlags & PFLAG_ONBARNACLE) > 0; }
 	void				InputForceDropPhysObjects( inputdata_t &data );
