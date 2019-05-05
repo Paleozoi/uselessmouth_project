@@ -110,8 +110,8 @@ ConVar	spec_freeze_traveltime( "spec_freeze_traveltime", "0.4", FCVAR_CHEAT | FC
 ConVar	spec_freeze_distance_min( "spec_freeze_distance_min", "96", FCVAR_CHEAT, "Minimum random distance from the target to stop when framing them in observer freeze cam." );
 ConVar	spec_freeze_distance_max( "spec_freeze_distance_max", "200", FCVAR_CHEAT, "Maximum random distance from the target to stop when framing them in observer freeze cam." );
 #endif
-
-static ConVar	cl_first_person_uses_world_model ( "cl_first_person_uses_world_model", "0", FCVAR_ARCHIVE, "Causes the third person model to be drawn instead of the view model" );
+// NOTE(richard): For now just enable this.
+static ConVar	cl_first_person_uses_world_model ( "cl_first_person_uses_world_model", "1", FCVAR_CHEAT | FCVAR_REPLICATED, "Causes the third person model to be drawn instead of the view model" );
 
 ConVar demo_fov_override( "demo_fov_override", "0", FCVAR_CLIENTDLL | FCVAR_DONTRECORD, "If nonzero, this value will be used to override FOV during demo playback." );
 
@@ -119,6 +119,7 @@ ConVar demo_fov_override( "demo_fov_override", "0", FCVAR_CLIENTDLL | FCVAR_DONT
 // Ideally we would find this vector by subtracting the neutral-pose difference between the head bone (the pivot point) and the "eyes" attachment point.
 // However, some characters don't have this attachment point, and finding the neutral pose is a pain.
 // This value is found by hand, and a good value depends more on the in-game models than on actual human shapes.
+// NOTE(richard): We probably should protect this.
 ConVar cl_meathook_neck_pivot_ingame_up( "cl_meathook_neck_pivot_ingame_up", "7.0" );
 ConVar cl_meathook_neck_pivot_ingame_fwd( "cl_meathook_neck_pivot_ingame_fwd", "3.0" );
 

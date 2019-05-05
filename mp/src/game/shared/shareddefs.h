@@ -99,8 +99,8 @@ public:
 #define VEC_DEAD_VIEWHEIGHT_SCALED( player )	( g_pGameRules->GetViewVectors()->m_vDeadViewHeight * player->GetModelScale() )
 
 #define WATERJUMP_HEIGHT			8
-
-#define MAX_CLIMB_SPEED		200
+// NOTE(richard): I changed this from 200.
+#define MAX_CLIMB_SPEED		130
 
 #if defined(TF_DLL) || defined(TF_CLIENT_DLL)
 	#define TIME_TO_DUCK		0.2
@@ -233,8 +233,8 @@ enum CastVote
 #endif
 
 #define MAX_PLACE_NAME_LENGTH		18
-
-#define MAX_FOV						90
+// NOTE(richard): I changed this from FOV 90.
+#define MAX_FOV						130
 
 //===================================================================================================================
 // Team Defines

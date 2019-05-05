@@ -105,7 +105,7 @@ static ConVar old_armor( "player_old_armor", "0" );
 static ConVar physicsshadowupdate_render( "physicsshadowupdate_render", "0" );
 bool IsInCommentaryMode( void );
 bool IsListeningToCommentary( void );
-
+// NOTE(richard): We probably need to change this settings to adjust speed in HL2MP.
 #if !defined( CSTRIKE_DLL )
 ConVar cl_sidespeed( "cl_sidespeed", "450", FCVAR_REPLICATED | FCVAR_CHEAT );
 ConVar cl_upspeed( "cl_upspeed", "320", FCVAR_REPLICATED | FCVAR_CHEAT );
@@ -176,12 +176,12 @@ extern void AddMultiDamage( const CTakeDamageInfo &info, CBaseEntity *pEntity );
 //#define	DAMAGE_PER_UNIT_FALLEN		(float)( 100 ) / ( ( PLAYER_FATAL_FALL_DIST - PLAYER_MAX_SAFE_FALL_DIST ) * 12 )
 //#define MAX_SAFE_FALL_UNITS			( PLAYER_MAX_SAFE_FALL_DIST * 12 )
 
-// player damage adjusters
-ConVar	sk_player_head( "sk_player_head","2" );
-ConVar	sk_player_chest( "sk_player_chest","1" );
-ConVar	sk_player_stomach( "sk_player_stomach","1" );
-ConVar	sk_player_arm( "sk_player_arm","1" );
-ConVar	sk_player_leg( "sk_player_leg","1" );
+// player damage adjusters // NOTE(richard): Does this work? The more number - the more damage? Should I protect this from skill.cfg?
+ConVar	sk_player_head( "sk_player_head","2", FCVAR_REPLICATED | FCVAR_CHEAT );
+ConVar	sk_player_chest( "sk_player_chest","1", FCVAR_REPLICATED | FCVAR_CHEAT );
+ConVar	sk_player_stomach( "sk_player_stomach","1", FCVAR_REPLICATED | FCVAR_CHEAT );
+ConVar	sk_player_arm( "sk_player_arm","1", FCVAR_REPLICATED | FCVAR_CHEAT );
+ConVar	sk_player_leg( "sk_player_leg","1", FCVAR_REPLICATED | FCVAR_CHEAT );
 
 //ConVar	player_usercommand_timeout( "player_usercommand_timeout", "10", 0, "After this many seconds without a usercommand from a player, the client is kicked." );
 #ifdef _DEBUG

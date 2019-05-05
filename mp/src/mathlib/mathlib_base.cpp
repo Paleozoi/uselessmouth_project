@@ -3894,7 +3894,7 @@ float CalcFovY( float flFovX, float flAspect )
 {
 	if ( flFovX < 1 || flFovX > 179)
 	{
-		flFovX = 90;	// error, set to 90
+		flFovX = 130;	// error, set to 90 // NOTE(richard): I changed this from FOV 90.
 	}
 
 	// The long, but illustrative version (more closely matches CShaderAPIDX8::PerspectiveX, which

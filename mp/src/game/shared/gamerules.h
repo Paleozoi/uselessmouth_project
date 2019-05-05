@@ -143,8 +143,8 @@ public:
 	virtual bool SwitchToNextBestWeapon( CBaseCombatCharacter *pPlayer, CBaseCombatWeapon *pCurrentWeapon ); // Switch to the next best weapon
 	virtual CBaseCombatWeapon *GetNextBestWeapon( CBaseCombatCharacter *pPlayer, CBaseCombatWeapon *pCurrentWeapon ); // I can't use this weapon anymore, get me the next best one.
 	virtual bool ShouldCollide( int collisionGroup0, int collisionGroup1 );
-
-	virtual int DefaultFOV( void ) { return 90; }
+    // NOTE(richard): I changed this from FOV 90.
+	virtual int DefaultFOV( void ) { return 130; }
 
 	// This function is here for our CNetworkVars.
 	inline void NetworkStateChanged()

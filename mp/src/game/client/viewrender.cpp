@@ -128,13 +128,13 @@ ConVar r_worldlistcache( "r_worldlistcache", "1" );
 // Convars related to fog color
 //-----------------------------------------------------------------------------
 static ConVar fog_override( "fog_override", "0", FCVAR_CHEAT );
-// set any of these to use the maps fog
-static ConVar fog_start( "fog_start", "-1", FCVAR_CHEAT );
-static ConVar fog_end( "fog_end", "-1", FCVAR_CHEAT );
+// set any of these to use the maps fog // NOTE(richard): The FCVAR_REPLICATED ones were FCVAR_CHEAT.
+static ConVar fog_start( "fog_start", "-1", FCVAR_REPLICATED );
+static ConVar fog_end( "fog_end", "-1", FCVAR_REPLICATED );
 static ConVar fog_color( "fog_color", "-1 -1 -1", FCVAR_CHEAT );
 static ConVar fog_enable( "fog_enable", "1", FCVAR_CHEAT );
-static ConVar fog_startskybox( "fog_startskybox", "-1", FCVAR_CHEAT );
-static ConVar fog_endskybox( "fog_endskybox", "-1", FCVAR_CHEAT );
+static ConVar fog_startskybox( "fog_startskybox", "-1", FCVAR_REPLICATED );
+static ConVar fog_endskybox( "fog_endskybox", "-1", FCVAR_REPLICATED );
 static ConVar fog_maxdensityskybox( "fog_maxdensityskybox", "-1", FCVAR_CHEAT );
 static ConVar fog_colorskybox( "fog_colorskybox", "-1 -1 -1", FCVAR_CHEAT );
 static ConVar fog_enableskybox( "fog_enableskybox", "1", FCVAR_CHEAT );

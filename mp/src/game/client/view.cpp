@@ -111,8 +111,8 @@ static ConVar v_centerspeed( "v_centerspeed","500" );
 // 54 degrees approximates a 35mm camera - we determined that this makes the viewmodels
 // and motions look the most natural.
 ConVar v_viewmodel_fov( "viewmodel_fov", "54", FCVAR_ARCHIVE, "Sets the field-of-view for the viewmodel.", true, 0.1, true, 179.9 );
-#else
-ConVar v_viewmodel_fov( "viewmodel_fov", "54", FCVAR_CHEAT, "Sets the field-of-view for the viewmodel.", true, 0.1, true, 179.9 );
+#else // NOTE(richard): Changed this, so it would match (kinda, fixme) firstperson world model position.
+ConVar v_viewmodel_fov( "viewmodel_fov", "130", FCVAR_CHEAT, "Sets the field-of-view for the viewmodel.", true, 0.1, true, 179.9 );
 #endif
 ConVar mat_viewportscale( "mat_viewportscale", "1.0", FCVAR_ARCHIVE, "Scale down the main viewport (to reduce GPU impact on CPU profiling)", true, (1.0f / 640.0f), true, 1.0f );
 ConVar mat_viewportupscale( "mat_viewportupscale", "1", FCVAR_ARCHIVE, "Scale the viewport back up" );
@@ -124,8 +124,8 @@ static ConVar r_mapextents( "r_mapextents", "16384", FCVAR_CHEAT,
 // UNDONE: Delete this or move to the material system?
 ConVar	gl_clear( "gl_clear", "0");
 ConVar	gl_clear_randomcolor( "gl_clear_randomcolor", "0", FCVAR_CHEAT, "Clear the back buffer to random colors every frame. Helps spot open seams in geometry." );
-
-static ConVar r_farz( "r_farz", "-1", FCVAR_CHEAT, "Override the far clipping plane. -1 means to use the value in env_fog_controller." );
+// NOTE(richard): The r_farz FCVAR_REPLICATED were FCVAR_CHEAT.
+static ConVar r_farz( "r_farz", "-1", FCVAR_REPLICATED, "Override the far clipping plane. -1 means to use the value in env_fog_controller." );
 static ConVar cl_demoviewoverride( "cl_demoviewoverride", "0", 0, "Override view during demo playback" );
 
 
