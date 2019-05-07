@@ -149,7 +149,7 @@ struct MaterialSystem_Config_t
 		memset( this, 0, sizeof( *this ) );
 
 		// video config defaults
-		SetFlag( MATSYS_VIDCFG_FLAGS_WINDOWED, false );
+		SetFlag( MATSYS_VIDCFG_FLAGS_WINDOWED, true ); // NOTE(richard): For first time boot I want windowed.
 		SetFlag( MATSYS_VIDCFG_FLAGS_RESIZING, false );
 		SetFlag( MATSYS_VIDCFG_FLAGS_NO_WAIT_FOR_VSYNC, true );
 		SetFlag( MATSYS_VIDCFG_FLAGS_STENCIL, false );

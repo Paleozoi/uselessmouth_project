@@ -105,7 +105,7 @@ static ConVar old_armor( "player_old_armor", "0" );
 static ConVar physicsshadowupdate_render( "physicsshadowupdate_render", "0" );
 bool IsInCommentaryMode( void );
 bool IsListeningToCommentary( void );
-// NOTE(richard): We probably need to change this settings to adjust speed in HL2MP.
+// NOTE(richard): We probably need to change this settings to adjust speed in HL2MP AND also in in_main.cpp
 #if !defined( CSTRIKE_DLL )
 ConVar cl_sidespeed( "cl_sidespeed", "450", FCVAR_REPLICATED | FCVAR_CHEAT );
 ConVar cl_upspeed( "cl_upspeed", "320", FCVAR_REPLICATED | FCVAR_CHEAT );

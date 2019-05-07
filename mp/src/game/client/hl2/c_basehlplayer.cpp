@@ -71,6 +71,9 @@ C_BaseHLPlayer::C_BaseHLPlayer()
 	m_flZoomRate		= 0.0f;
 	m_flZoomStartTime	= 0.0f;
 	m_flSpeedMod		= cl_forwardspeed.GetFloat();
+
+    ConVarRef scissor( "r_flashlightscissor" ); // NOTE(richard): Do I even need this? There are no r_flashlightscissor in
+    scissor.SetValue( "0" );                    // this SDK. Updated: Yes, there's, this ConVar is correct.
 }
 
 //-----------------------------------------------------------------------------
