@@ -263,12 +263,12 @@ void CHL2MPPlayerAnimState::DoAnimationEvent( PlayerAnimEvent_t event, int nData
 
 #ifdef CLIENT_DLL
 	// Make the weapon play the animation as well
-	if ( iGestureActivity != ACT_INVALID )
+	if ( iGestureActivity != ACT_INVALID && GetBasePlayer() != C_BasePlayer::GetLocalPlayer() )
 	{
 		CBaseCombatWeapon *pWeapon = GetHL2MPPlayer()->GetActiveWeapon();
 		if ( pWeapon )
 		{
-//			pWeapon->EnsureCorrectRenderingModel();
+//			pWeapon->EnsureCorrectRenderingModel(); // NOTE(richard): Do I need to uncomment these?
 			pWeapon->SendWeaponAnim( iGestureActivity );
 //			// Force animation events!
 //			pWeapon->ResetEventsParity();		// reset event parity so the animation events will occur on the weapon. 
