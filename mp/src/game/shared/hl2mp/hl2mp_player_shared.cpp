@@ -82,7 +82,7 @@ void CHL2MP_Player::PlayStepSound( Vector &vecOrigin, surfacedata_t *psurface, f
 		return;
 #endif
 
-	if ( GetFlags() & FL_DUCKING )
+	if ( GetFlags() & FL_DUCKING ) // NOTE(richard): Need to add another flag for slow walking.
 		return;
 
 	m_Local.m_nStepside = !m_Local.m_nStepside;

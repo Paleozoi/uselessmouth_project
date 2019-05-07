@@ -778,7 +778,7 @@ void CBasePlayer::GetStepSoundVelocities( float *velwalk, float *velrun )
 	}
 	else
 	{
-		*velwalk = 90;
+		*velwalk = 140;      // NOTE(richard): Minimum velocity when sound will play.
 		*velrun = 220;
 	}
 }

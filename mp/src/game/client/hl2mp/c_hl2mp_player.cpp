@@ -61,10 +61,13 @@ BEGIN_PREDICTION_DATA( C_HL2MP_Player )
 	DEFINE_PRED_ARRAY_TOL( m_flEncodedController, FIELD_FLOAT, MAXSTUDIOBONECTRLS, FTYPEDESC_OVERRIDE | FTYPEDESC_PRIVATE, 0.02f ),
 	DEFINE_PRED_FIELD( m_nNewSequenceParity, FIELD_INTEGER, FTYPEDESC_OVERRIDE | FTYPEDESC_PRIVATE | FTYPEDESC_NOERRORCHECK ),
 END_PREDICTION_DATA()
-// NOTE(richard): These bois are max speed. I think I can set walk speed very low. Should investigate this.
-#define	HL2_WALK_SPEED 150
-#define	HL2_NORM_SPEED 190
-#define	HL2_SPRINT_SPEED 320
+// NOTE(richard): These work only if I change them in server\hl2\hl2_player.cpp
+// #define	HL2_WALK_SPEED 150
+// #define	HL2_NORM_SPEED 190
+// #define	HL2_SPRINT_SPEED 320
+#define	HL2_WALK_SPEED 90
+#define	HL2_NORM_SPEED 150
+#define	HL2_SPRINT_SPEED 220
 
 static ConVar cl_playermodel( "cl_playermodel", "none", FCVAR_USERINFO | FCVAR_ARCHIVE | FCVAR_SERVER_CAN_EXECUTE, "Default Player Model");
 static ConVar cl_defaultweapon( "cl_defaultweapon", "weapon_physcannon", FCVAR_USERINFO | FCVAR_ARCHIVE, "Default Spawn Weapon");

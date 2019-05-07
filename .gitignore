@@ -61,3 +61,5 @@ config.cfg
 # Misc files for dev
 /dev_misc
 /.vscode
+*.lib
+*.pdb

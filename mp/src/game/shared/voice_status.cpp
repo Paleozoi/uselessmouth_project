@@ -41,8 +41,8 @@ extern int cam_thirdperson;
 
 #define VOICE_MODEL_INTERVAL		0.3
 #define SQUELCHOSCILLATE_PER_SECOND	2.0f
-
-ConVar voice_modenable( "voice_modenable", "1", FCVAR_ARCHIVE | FCVAR_CLIENTCMD_CAN_EXECUTE, "Enable/disable voice in this mod." );
+// NOTE(richard): Disable Voice chat for now.
+ConVar voice_modenable( "voice_modenable", "0", FCVAR_ARCHIVE | FCVAR_CLIENTCMD_CAN_EXECUTE | FCVAR_REPLICATED, "Enable/disable voice in this mod." );
 ConVar voice_clientdebug( "voice_clientdebug", "0" );
 
 // ---------------------------------------------------------------------- //
