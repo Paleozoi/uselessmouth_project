@@ -56,14 +56,14 @@ inline T Lerp_Hermite( float t, const T& p0, const T& p1, const T& p2 )
 	return output;
 }
 
-template <> 
-inline float Lerp_Hermite<float>( float t, const float& p0, const float& p1, const float& p2 )
+template <>
+inline float Lerp_Hermite( float t, const float& p0, const float& p1, const float& p2 )
 {
 	float d1 = p1 - p0;
 	float d2 = p2 - p1;
 
-	if ( d1 < 0.00001 ) d1 = 0;
-	if ( d2 < 0.00001 ) d2 = 0;
+	if ( d1 < 0.00001f ) d1 = 0;
+	if ( d2 < 0.00001f ) d2 = 0;
 
 	float output;
 	float tSqr = t*t;
