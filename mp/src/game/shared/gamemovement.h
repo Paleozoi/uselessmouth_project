@@ -215,6 +215,8 @@ protected:
 	virtual void	HandleDuckingSpeedCrop();
 	virtual void	FinishUnDuck( void );
 	virtual void	FinishDuck( void );
+    virtual void	DoDuckJump( float flFraction );
+    virtual void	DoUnDuckJump( float flFraction );
 	virtual bool	CanUnduck();
 	void			UpdateDuckJumpEyeOffset( void );
 	bool			CanUnDuckJump( trace_t &trace );
