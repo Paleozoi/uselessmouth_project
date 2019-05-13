@@ -72,6 +72,8 @@ END_PREDICTION_DATA()
 static ConVar cl_playermodel( "cl_playermodel", "none", FCVAR_USERINFO | FCVAR_ARCHIVE | FCVAR_SERVER_CAN_EXECUTE, "Default Player Model");
 static ConVar cl_defaultweapon( "cl_defaultweapon", "weapon_physcannon", FCVAR_USERINFO | FCVAR_ARCHIVE, "Default Spawn Weapon");
 
+static ConVar cl_fp_ragdoll ( "cl_fp_ragdoll", "1", FCVAR_CHEAT, "Allow first person ragdolls" );
+
 void SpawnBlood (Vector vecSpot, const Vector &vecDir, int bloodColor, float flDamage);
 
 C_HL2MP_Player::C_HL2MP_Player() : m_iv_angEyeAngles( "C_HL2MP_Player::m_iv_angEyeAngles" )
@@ -717,7 +719,21 @@ void C_HL2MP_Player::CalcView( Vector &eyeOrigin, QAngle &eyeAngles, float &zNea
 {
 	if ( m_lifeState != LIFE_ALIVE && !IsObserver() )
 	{
-		Vector origin = EyePosition();			
+        // First person ragdolls
+		if ( cl_fp_ragdoll.GetBool() && m_hRagdoll.Get() ) // TODO(richard): Need to scale our ragdoll head to zero.
+		{
+			// pointer to the ragdoll
+			C_HL2MPRagdoll *pRagdoll = (C_HL2MPRagdoll*)m_hRagdoll.Get();
+
+			// gets its origin and angles
+			pRagdoll->GetAttachment( pRagdoll->LookupAttachment( "eyes" ), eyeOrigin, eyeAngles );
+			Vector vForward;
+			AngleVectors( eyeAngles, &vForward );
+
+            return;
+		}
+        
+		Vector origin = EyePosition();
 
 		IRagdoll *pRagdoll = GetRepresentativeRagdoll();
 
@@ -889,6 +905,9 @@ void C_HL2MPRagdoll::CreateHL2MPRagdoll( void )
 		}
 		else
 		{
+            ConVarRef fps_model( "cl_first_person_uses_world_model" ); // NOTE(richard): Fixing meathook ragdoll.
+            fps_model.SetValue( "0" );
+
 			// This is the local player, so set them in a default
 			// pose and slam their velocity, angles and origin
 			SetAbsOrigin( m_vecRagdollOrigin );

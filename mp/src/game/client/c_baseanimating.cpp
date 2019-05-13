@@ -4437,7 +4437,7 @@ void C_BaseAnimating::VPhysicsUpdate( IPhysicsObject *pPhysics )
 	// FIXME: Should make sure the physics objects being passed in
 	// is the ragdoll physics object, but I think it's pretty safe not to check
 	if (IsRagdoll())
-	{	 
+	{
 		m_pRagdoll->VPhysicsUpdate( pPhysics );
 		
 		RagdollMoved();

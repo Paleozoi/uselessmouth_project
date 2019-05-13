@@ -2103,6 +2103,10 @@ void CBasePlayer::PlayerDeathThink(void)
 		PackDeadPlayerItems();
 	}
 
+    ConVarRef fps_model( "cl_first_person_uses_world_model" ); // NOTE(richard): Fixing meathook ragdoll.
+    if ( !fps_model.GetBool() )
+        fps_model.SetValue( "1" );
+
 	if (GetModelIndex() && (!IsSequenceFinished()) && (m_lifeState == LIFE_DYING))
 	{
 		StudioFrameAdvance( );
