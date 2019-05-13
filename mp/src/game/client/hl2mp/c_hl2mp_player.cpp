@@ -962,6 +962,10 @@ void C_HL2MPRagdoll::CreateHL2MPRagdoll( void )
 	}
 
 	InitAsClientRagdoll( boneDelta0, boneDelta1, currentBones, boneDt );
+
+    ConVarRef fps_model( "cl_first_person_uses_world_model" ); // NOTE(richard): Fixing meathook ragdoll.
+    if ( !fps_model.GetBool() )
+        fps_model.SetValue( "1" );
 }
 
 
