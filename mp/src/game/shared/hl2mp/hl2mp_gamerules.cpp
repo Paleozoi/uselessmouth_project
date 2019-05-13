@@ -944,8 +944,8 @@ CAmmoDef *GetAmmoDef()
 
 	ConVar cl_autowepswitch(
 		"cl_autowepswitch",
-		"1",
-		FCVAR_ARCHIVE | FCVAR_USERINFO,
+		"0",
+		FCVAR_CHEAT | FCVAR_USERINFO, // NOTE (richard): Instead of FCVAR_CHEAT was FCVAR_ARCHIVE.
 		"Automatically switch to picked up weapons (if more powerful)" );
 
 #else
