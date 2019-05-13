@@ -1100,7 +1100,7 @@ ConVarRef suitcharger( "sk_suitcharger" );
 		if ( footsteps.GetInt() == 0 )
 			return false;
 
-		if ( pl->IsOnLadder() || pl->GetAbsVelocity() > 140 ) // NOTE(richard): Was pl->GetAbsVelocity().Length2D(). Change speed in server\hl2\hl2_player.cpp
+		if ( pl->IsOnLadder() || pl->GetAbsVelocity().Length() > 140 ) // NOTE(richard): Was pl->GetAbsVelocity().Length2D(). Change speed in server\hl2\hl2_player.cpp
 			return true;  // only make step sounds in multiplayer if the player is moving fast enough
 
 		return false;
