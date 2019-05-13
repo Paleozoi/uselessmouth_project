@@ -39,7 +39,9 @@ static ConVar r_flashlightfov( "r_flashlightfov", "45.0", FCVAR_CHEAT );
 static ConVar r_flashlightoffsetx( "r_flashlightoffsetx", "10.0", FCVAR_CHEAT );
 static ConVar r_flashlightoffsety( "r_flashlightoffsety", "-20.0", FCVAR_CHEAT );
 static ConVar r_flashlightoffsetz( "r_flashlightoffsetz", "24.0", FCVAR_CHEAT );
-static ConVar r_flashlightnear( "r_flashlightnear", "4.0", FCVAR_CHEAT );
+// TODO(richard): r_flashlightnear was 4.0. The  this is just a nasty way to get rid of fps player model's shadow.
+// The right way to do this, is to ignore fps model on client for flashlight in CTraceFilterSkipPlayerAndViewModel.
+static ConVar r_flashlightnear( "r_flashlightnear", "45.0", FCVAR_CHEAT );
 static ConVar r_flashlightfar( "r_flashlightfar", "750.0", FCVAR_CHEAT );
 static ConVar r_flashlightconstant( "r_flashlightconstant", "0.0", FCVAR_CHEAT );
 static ConVar r_flashlightlinear( "r_flashlightlinear", "100.0", FCVAR_CHEAT );
