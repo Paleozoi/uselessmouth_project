@@ -120,7 +120,7 @@ CEnvProjectedTexture::CEnvProjectedTexture( void )
 {
 	m_bState = true;
 	m_flLightFOV = 45.0f;
-	m_bEnableShadows = true; // NOTE(richard): Do we need to set this to true, so shadows would work on server for other players?
+	m_bEnableShadows = false; // NOTE(richard): Do we need to set this to true, so shadows would work from flashlight on server for other players? Answer: it does nothing.
 	m_bLightOnlyTarget = false;
 	m_bLightWorld = true;
 	m_bCameraSpace = false;
