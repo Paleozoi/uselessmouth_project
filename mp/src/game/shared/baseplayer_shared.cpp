@@ -656,7 +656,7 @@ void CBasePlayer::UpdateStepSound( surfacedata_t *psurface, const Vector &vecOri
 		fvol *= 0.65;
 	}
 
-	PlayStepSound( feet, psurface, fvol, false );
+	PlayStepSound( feet, psurface, fvol, false ); // NOTE(richard): Do i need to set this to true?
 }
 
 //-----------------------------------------------------------------------------
@@ -678,6 +678,9 @@ void CBasePlayer::PlayStepSound( Vector &vecOrigin, surfacedata_t *psurface, flo
 
 	if ( !psurface )
 		return;
+
+    // if ( GetFlags() & FL_DUCKING ) // NOTE(richard): If I'll use this, player can silently jump in duck mode,
+	// 	return;                       // so I don't think this is okay...
 
 	int nSide = m_Local.m_nStepside;
 	unsigned short stepSoundName = nSide ? psurface->sounds.stepleft : psurface->sounds.stepright;
@@ -716,6 +719,10 @@ void CBasePlayer::PlayStepSound( Vector &vecOrigin, surfacedata_t *psurface, flo
 	CRecipientFilter filter;
 	filter.AddRecipientsByPAS( vecOrigin );
 
+    // NOTE(richard): If I comment this ifndef the player footsteps will be sent to server, I can see them in net_graph,
+    // but I need to check if the footstep sounds are working just like weapons. The weapon sounds are not generated on server,
+    // but everyone can hear them just fine, maybe that's also the case for footsteps.
+    // If MP footsteps will not work, I'll need to comment this ifndef and check again.
 #ifndef CLIENT_DLL
 	// in MP, server removes all players in the vecOrigin's PVS, these players generate the footsteps client side
 	if ( gpGlobals->maxClients > 1 )

@@ -73,6 +73,11 @@ Vector CHL2MP_Player::GetAttackSpread( CBaseCombatWeapon *pWeapon, CBaseEntity *
 //-----------------------------------------------------------------------------
 void CHL2MP_Player::PlayStepSound( Vector &vecOrigin, surfacedata_t *psurface, float fvol, bool force )
 {
+    // NOTE(richard): HL2MP stepsounds are broken, they also don't deal with surface sounds,
+    // so I'll just use shared\baseplayer_shared.cpp for now.
+    CBasePlayer::PlayStepSound( vecOrigin, psurface, fvol, force );
+
+/*
 	if ( gpGlobals->maxClients > 1 && !sv_footsteps.GetFloat() )
 		return;
 
@@ -122,4 +127,6 @@ void CHL2MP_Player::PlayStepSound( Vector &vecOrigin, surfacedata_t *psurface, f
 	ep.m_pOrigin = &vecOrigin;
 
 	EmitSound( filter, entindex(), ep );
+*/
+
 }
